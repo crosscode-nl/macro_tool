@@ -15,7 +15,7 @@ namespace crosscode::macro_tool {
     };
 
     struct macro_token : public std::string {
-        explicit macro_token(std::string_view macro, char macro_param_separator);
+        macro_token(std::string_view macro, char macro_param_separator);
 
         std::string macro_name;
         std::string macro_param;
