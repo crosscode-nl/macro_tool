@@ -6,16 +6,24 @@ namespace cmt = crosscode::macro_tool;
 using namespace std::literals;
 
 struct macro_handler {
-    std::string handle(std::string_view macro, std::string_view param) const {
+    static std::string handle_empty() {
+        return "%";
+    }
+
+    static std::string handle_test(std::string_view param) {
+        std::string result{"THIS"};
+        if (!param.empty()) {
+            result += "("s + std::string{param} + ")"s;
+        }
+        return result;
+    }
+
+    static std::string handle(std::string_view macro, std::string_view param) {
         if (macro.empty()) {
-            return "%";
+            return handle_empty();
         }
         if (macro=="TEST") {
-            std::string result{"THIS"};
-            if (!param.empty()) {
-                result += "("s + std::string{param} + ")"s;
-            }
-            return result;
+            return handle_test(param);
         }
         return std::string{};
     }
