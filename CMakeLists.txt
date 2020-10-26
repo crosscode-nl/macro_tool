@@ -20,12 +20,12 @@ configure_file(include/${PROJECT_NAME}/version.h.in ${CMAKE_CURRENT_BINARY_DIR}/
 
 list(APPEND ${PROJECT_NAME}_HEADERS
         include/${PROJECT_NAME}.h
-        include/${PROJECT_NAME}/macro_engine.h
+        include/${PROJECT_NAME}/macro_render_engine.h
         ${CMAKE_CURRENT_BINARY_DIR}/include/${PROJECT_NAME}/version.h
         )
 
 list(APPEND ${PROJECT_NAME}_SRC
-        src/${PROJECT_NAME}/macro_engine.cpp
+        src/${PROJECT_NAME}/macro_render_engine.cpp
         ${CMAKE_CURRENT_BINARY_DIR}/src/${PROJECT_NAME}/version.cpp
         )
 

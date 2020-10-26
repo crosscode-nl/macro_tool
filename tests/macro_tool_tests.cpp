@@ -7,7 +7,7 @@ using namespace std::literals;
 
 struct macro_handler {
     static std::string handle_empty() {
-        return "%";
+        return "EMPTY";
     }
 
     static std::string handle_test(std::string_view param) {
@@ -30,22 +30,22 @@ struct macro_handler {
 };
 
 TEST_SUITE("Macro tool tests") {
-    TEST_CASE("macro_engine can render macro") {
-        cmt::macro_engine<macro_handler> macro{"Test %TEST%%% macro"};
-        REQUIRE("Test THIS% macro"==macro.render());
+    TEST_CASE("Can render empty string") {
+        REQUIRE(""==cmt::render_macros<macro_handler>(""));
+    }
+    TEST_CASE("Can render unknown macro string") {
+        REQUIRE(""==cmt::render_macros<macro_handler>("%UNKNOWN%"));
+    }
+    TEST_CASE("Can render macro with param separator") {
+        REQUIRE("THIS"==cmt::render_macros<macro_handler>("%TEST:%"));
+    }
+    TEST_CASE("Can render open macro with param separator") {
+        REQUIRE("PREFIX THIS"==cmt::render_macros<macro_handler>("PREFIX %TEST:%%OPEN"));
     }
     TEST_CASE("render_macros can render macro") {
-        REQUIRE("Test THIS% macro"==cmt::render_macros<macro_handler>("Test %TEST%%% macro"));
+        REQUIRE("Test THISEMPTY macro"==cmt::render_macros<macro_handler>("Test %TEST%%% macro"));
     }
-    TEST_CASE("macro_engine can render macro with param") {
-        cmt::macro_engine<macro_handler> macro{"Test %TEST:MY%%% macro"};
-        REQUIRE("Test THIS(MY)% macro"==macro.render());
-    }
-    TEST_CASE("macro_engine can render macro with param with delimiter $ and separator |") {
-        cmt::macro_engine<macro_handler> macro{"Test $TEST|MY$$$ macro",'$','|'};
-        REQUIRE("Test THIS(MY)% macro"==macro.render());
-    }
-    TEST_CASE("render_macros can render macro with param with delimiter $ and separator |") {
-        REQUIRE("Test THIS(MY)% macro"==cmt::render_macros<macro_handler,'$','|'>("Test $TEST|MY$$$ macro"));
+    TEST_CASE("render_macros can render macro with param with delimiter and delimiter $ and separator |") {
+        REQUIRE("Test THIS(MY)EMPTY macro"==cmt::render_macros<macro_handler,'$','|'>("Test $TEST|MY$$$ macro"));
     }
 }

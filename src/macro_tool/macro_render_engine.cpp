@@ -1,4 +1,4 @@
-#include "macro_tool/macro_engine.h"
+#include "macro_tool/macro_render_engine.h"
 
 
 namespace crosscode::macro_tool {
@@ -17,9 +17,15 @@ namespace crosscode::macro_tool {
                     start = current + 1;
                     in_macro = true;
                 } else {
-                    if (start <=
-                        current) { // empty macros do need to be added, because they can mean an escape for %
-                        tokens.emplace_back(macro_token{text.substr(start - begin(text), current - start),macro_param_separator});
+                    if (start <= current) { // empty macros do need to be added, because they can mean an escape for %
+                        auto macro_name_and_param = text.substr(start - begin(text), current - start);
+                        auto macro_param_separator_pos = macro_name_and_param.find(macro_param_separator);
+                        if (macro_param_separator_pos != decltype(macro_name_and_param)::npos) {
+                            tokens.emplace_back(macro_name_token{macro_name_and_param.substr(0, macro_param_separator_pos)});
+                            tokens.emplace_back(macro_param_token{macro_name_and_param.substr(macro_param_separator_pos + 1)});
+                        } else {
+                            tokens.emplace_back(macro_name_token{macro_name_and_param});
+                        }
                     }
                     start = current + 1;
                     in_macro = false;
@@ -35,14 +41,5 @@ namespace crosscode::macro_tool {
         return tokens;
     }
 
-    macro_token::macro_token(std::string_view macro, char macro_param_separator) {
-        auto separator_pos = macro.find(macro_param_separator);
-        if (separator_pos != macro_token::npos) {
-            macro_name = macro.substr(0, separator_pos);
-            macro_param = macro.substr(separator_pos + 1);
-        } else {
-            macro_name = macro;
-        }
-    }
 
 }
