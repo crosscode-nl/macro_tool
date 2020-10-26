@@ -20,14 +20,16 @@ configure_file(include/${PROJECT_NAME}/version.h.in ${CMAKE_CURRENT_BINARY_DIR}/
 
 list(APPEND ${PROJECT_NAME}_HEADERS
         include/${PROJECT_NAME}.h
+        include/${PROJECT_NAME}/macro_engine.h
         ${CMAKE_CURRENT_BINARY_DIR}/include/${PROJECT_NAME}/version.h
         )
 
 list(APPEND ${PROJECT_NAME}_SRC
+        src/${PROJECT_NAME}/macro_engine.cpp
         ${CMAKE_CURRENT_BINARY_DIR}/src/${PROJECT_NAME}/version.cpp
         )
 
-add_library(${PROJECT_NAME} ${${PROJECT_NAME}_HEADERS} ${${PROJECT_NAME}_SRC})
+add_library(${PROJECT_NAME} ${${PROJECT_NAME}_HEADERS} ${${PROJECT_NAME}_SRC} )
 
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
 
