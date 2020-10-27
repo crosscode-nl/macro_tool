@@ -8,7 +8,14 @@
 
 ## Introduction
 
-macro_tool 
+macro_tool is a lean and simple C++17 library that helps parsing simple text macros in the following form:
+
+"This text is created in year %DATE:yyyy% and written by %AUTHOR%"
+
+Nested macros are not supported, and it also not meant as an advanced template engine.
+
+Using this library saves you writing code lexing/tokenizing this text, and you now only have write the code that 
+replaces the macros. 
 
 ## Installation
 
@@ -48,6 +55,7 @@ include(FetchContent)
 FetchContent_Declare(
         macro_tool
         GIT_REPOSITORY https://github.com/crosscode-nl/macro_tool
+        GIT_TAG main
 )
 FetchContent_MakeAvailable(macro_tool)
 target_link_libraries(${PROJECT_NAME} macro_tool)
@@ -66,6 +74,7 @@ include(FetchContent)
 FetchContent_Declare(
         macro_tool
         GIT_REPOSITORY https://github.com/crosscode-nl/macro_tool
+        GIT_TAG main
 )
 FetchContent_MakeAvailable(macro_tool)
 target_link_libraries(${PROJECT_NAME} macro_tool)
