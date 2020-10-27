@@ -28,31 +28,51 @@ replaces the macros.
 struct macro_handler {
     std::chrono::system_clock::time_point time_point_ = std::chrono::system_clock::now();
 
-    [[nodiscard]] 
+    static std::string handle_reverse(std::string_view param) {
+        std::string result;
+        // Optional: Reserve size. Saves allocations if you know the size already and SSO is not possible.
+        result.reserve(size(param));  
+        std::copy(rbegin(param),rend(param),back_inserter(result));
+        return result;
+    }
+
+    [[nodiscard]]
     std::string handle_date(std::string_view param) const {
         auto time = std::chrono::system_clock::to_time_t(time_point_);
         auto tm = std::localtime(&time);
+
         if (param=="YEAR") return std::to_string(tm->tm_year+1900);
-        return asctime(tm);
+
+        std::string_view date_string = {std::asctime(tm)};
+        date_string.remove_suffix(1);
+        return std::string{date_string};
     }
 
     [[nodiscard]]
     std::string handle(std::string_view macro, std::string_view param) const {
+        if (macro=="REVERSE") return handle_reverse(param);
         if (macro=="AUTHOR") return "CrossCode";
         if (macro=="DATE") return handle_date(param);
         return std::string{};
     }
 };
 
-// You use the render_macros with your handler.
-int main() {
+// You could create a _macro literal if you have lots of texts with macros in your code.
+std::string operator ""_macro(const char* text, std::size_t size) {
     using namespace crosscode::macro_tool;
-    std::cout << render_macros<macro_handler>("(c)%DATE:YEAR% %AUTHOR%\nThis macro was executed on: %DATE%") << "\n";
+    // You use the render_macros with your handler.
+    return render_macros<macro_handler>(std::string_view{text,size});
+}
+
+// Now enjoy your macro replacements. 
+int main() {
+    std::cout << "(c)%DATE:YEAR% %AUTHOR%\nThis macro replacement was executed on: %DATE%\n"_macro;
+    std::cout << "I want to write backwards backwards, which is: %REVERSE:backwards%\n"_macro;
     return 0;
 }
-// Possible output:
 // (c)2020 CrossCode
-// This macro was executed on: Tue Oct 27 15:16:06 2020
+// This macro replacement was executed on: Tue Oct 27 15:55:04 2020
+// I want to write backwards backwards, which is: sdrawkcab
 ```
 
 See the examples for a deeper explanation of the library. 
