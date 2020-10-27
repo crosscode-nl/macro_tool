@@ -3,8 +3,8 @@
 
 namespace crosscode::macro_tool {
 
-    std::vector<token_type> macro_lexer(std::string_view text, char macro_delimiter, char macro_param_separator) {
-        std::vector<token_type> tokens;
+    token_variant_vector macro_lexer(std::string_view text, char macro_delimiter, char macro_param_separator) {
+        token_variant_vector tokens;
         auto start = begin(text);
         auto current = begin(text);
         bool in_macro = false;
