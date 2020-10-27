@@ -1,9 +1,8 @@
 # macro_tool
-[![GitHub version](https://badge.fury.io/gh/crosscode-nl%macro_tool.svg)](https://badge.fury.io/gh/crosscode-nl%macro_tool)
+[![GitHub version](https://badge.fury.io/gh/crosscode-nl%2Fmacro_tool.svg)](https://badge.fury.io/gh/crosscode-nl%2Fmacro_tool)
 [![Language grade: C/C++](https://img.shields.io/lgtm/grade/cpp/g/crosscode-nl/macro_tool.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/crosscode-nl/macro_tool/context:cpp)
 [![Build Status](https://travis-ci.com/crosscode-nl/macro_tool.svg?branch=main)](https://travis-ci.com/crosscode-nl/macro_tool) 
-CHANGE TO CORRECT REPO:
-[![Build status](https://ci.appveyor.com/api/projects/status/gtfghv1lfo1ww3th?svg=true)](https://ci.appveyor.com/project/crosscode-nl/macro_tool) 
+[![Build status](https://ci.appveyor.com/api/projects/status/uw3t7p76iqqjklpw?svg=true)](https://ci.appveyor.com/project/crosscode-nl/macro-tool)
 [![Standard](https://img.shields.io/badge/c%2B%2B-17/20-blue.svg)](https://en.wikipedia.org/wiki/C%2B%2B#Standardization)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 

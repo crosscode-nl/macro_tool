@@ -124,5 +124,5 @@ script:
   - tests/tests
 branches:
   only:
-    - master
+    - main
     - develop
