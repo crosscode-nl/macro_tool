@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.3.0 - 2020-10-27 - Fixed project naming
+
+### Added
+
+* Call begin_render() and done_render() on the provided macro handler.
+
 ## v1.2.0 - 2020-10-27 - Fixed project naming
 
 ### Changed
