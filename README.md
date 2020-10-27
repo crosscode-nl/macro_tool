@@ -26,26 +26,28 @@ replaces the macros.
 
 // You implement your macro handler.
 struct macro_handler {
-    static std::string handle_date(std::string_view param) {
-        auto time_point = std::chrono::system_clock::now();
-        auto time = std::chrono::system_clock::to_time_t(time_point);
+    std::chrono::system_clock::time_point time_point_ = std::chrono::system_clock::now();
+
+    [[nodiscard]] 
+    std::string handle_date(std::string_view param) const {
+        auto time = std::chrono::system_clock::to_time_t(time_point_);
         auto tm = std::localtime(&time);
         if (param=="YEAR") return std::to_string(tm->tm_year+1900);
         return asctime(tm);
     }
 
-    static std::string handle(std::string_view macro, std::string_view param) {
+    [[nodiscard]]
+    std::string handle(std::string_view macro, std::string_view param) const {
         if (macro=="AUTHOR") return "CrossCode";
         if (macro=="DATE") return handle_date(param);
         return std::string{};
     }
 };
 
-// You use the render_macros with your handler. 
+// You use the render_macros with your handler.
 int main() {
     using namespace crosscode::macro_tool;
-    std::cout << render_macros<macro_handler>("(c)%DATE:YEAR% %AUTHOR%") << "\n";
-    std::cout << render_macros<macro_handler>("This macro was executed on: %DATE%") << "\n";
+    std::cout << render_macros<macro_handler>("(c)%DATE:YEAR% %AUTHOR%\nThis macro was executed on: %DATE%") << "\n";
     return 0;
 }
 // Possible output:
