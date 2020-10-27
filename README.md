@@ -49,7 +49,7 @@ struct macro_handler {
 
         if (param=="YEAR") return std::to_string(tm->tm_year+1900);
 
-        std::string_view date_string = std::asctime(tm);
+        std::string_view date_string{std::asctime(tm)};
         date_string.remove_suffix(1);
         return std::string{date_string};
     }
