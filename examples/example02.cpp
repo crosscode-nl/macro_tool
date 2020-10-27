@@ -2,7 +2,7 @@
 #include "macro_tool.h"
 #include <charconv>
 
-// This demonstrates a macro_handler with state and a constructor
+// This advanced example demonstrates a macro_handler with state and a constructor, and the use of render_engine.
 struct stateful_macro_handler {
 
     int64_t counter_;
@@ -29,6 +29,7 @@ struct stateful_macro_handler {
         return std::string{};
     }
 };
+
 int main() {
     // makes all symbols in crosscode::macro_tool available in the current scope
     using namespace crosscode::macro_tool;
@@ -39,10 +40,12 @@ int main() {
     std::cout << "Using render_macros:\n";
     std::cout << render_macros<stateful_macro_handler>("%COUNTER% and another %COUNTER:4%", 0) << "\n";
     std::cout << render_macros<stateful_macro_handler>("%COUNTER% and another %COUNTER:4%", 0) << "\n\n";
+
     // However, if you want to call it again later, because you need the same text updated with newer values
     // you better use the render_engine. This time you need to call the lexer yourself.
     std::cout << "Using render_engine:\n";
     macro_render_engine<stateful_macro_handler> render_engine{macro_lexer("%COUNTER% and another %COUNTER:4%"),0};
+
     // Now you can call render multiple times and state will be preserved.
     std::cout << render_engine.render() << "\n";
     std::cout << render_engine.render() << "\n";

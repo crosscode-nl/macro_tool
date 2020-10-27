@@ -1,7 +1,7 @@
 #include <iostream>
 #include "macro_tool.h"
 
-// This example demonstrates the most simple usage of this library
+// This example demonstrates the most simple usage of this library.
 //
 // A macro handler must be provided.
 // A macro handler should be a class implementing a function called handle with the following signature:
@@ -9,8 +9,7 @@
 // or
 // static std::string handle(std::string_view macro, std::string_view param)
 //
-// This demonstrates a simple macro handler that formats the macro %EXAMPLE% as EXAMPLE and %EXAMPLE|PARAMETER%
-// as EXAMPLE(PARAMETER)
+// This demonstrates a simple macro handler that formats the macro %NAME% as NAME and %NAME|PARAM% as NAME(PARAM)
 struct echo {
     static std::string handle(std::string_view macro, std::string_view param) {
         if (param.empty()) return std::string{macro};
@@ -24,12 +23,11 @@ int main() {
 
     // A call to render_macros<echo>() with the provided text will result in a text that has all macros
     // replaces with content provided by the echo macro handler.
-    std::cout <<
-              render_macros<echo>(
-                      "This macro contains an %EXAMPLE% macro and %EXAMPLE|10% macro with parameter"
-              );
+    // By default macros are pair delimited with % characters and inside the macro a param is separated from
+    // the macro name with a : character.
+    std::cout << render_macros<echo>("%COUNTER% and another %COUNTER:4%");
 
     return 0;
 }
 // The output will be:
-// This macro contains an EXAMPLE macro and EXAMPLE|10 macro with parameter
+// COUNTER and another COUNTER(4)

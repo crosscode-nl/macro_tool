@@ -156,7 +156,9 @@ When you installed the library in a different location then you have to add
 
 Examine the following examples to learn how to use this library.
 
-* [example01.cpp](examples/example01.cpp) This is a minimal example and explains some **important key concepts**.
+* [example01.cpp](examples/example01.cpp) This example demonstrates the most simple usage of this library.
+* [example02.cpp](examples/example02.cpp) This advanced example demonstrates a macro_handler with state and a constructor, and the use of render_engine.
+* [example03.cpp](examples/example03.cpp) This example demonstrates non default macro delimiters and macro param separators.
 
 ## License
 
