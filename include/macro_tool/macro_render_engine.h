@@ -78,9 +78,9 @@ namespace crosscode::macro_tool {
         /// for each macro_name_token and macro_param_token a call to macro_handler_.handle(macro_name,macro_param)
         /// is made. The result of this call is a string which is then concatenated to the output string.
         /// \return The rendered text.
-        std::string render() {
+        std::string render(std::size_t reserve=0) {
             std::string result;
-
+            result.reserve(reserve);
             auto iterator = begin(tokens_);
             while (iterator!=end(tokens_)) {
                 if (std::holds_alternative<string_token>(*iterator)) {
