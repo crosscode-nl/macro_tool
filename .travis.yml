@@ -121,7 +121,7 @@ script:
   - cd build
   - cmake ..
   - make VERBOSE=1
-  - tests/tests
+  - tests/macro_tool_tests
 branches:
   only:
     - main
