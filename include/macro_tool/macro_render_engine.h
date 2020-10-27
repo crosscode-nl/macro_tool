@@ -46,7 +46,7 @@ namespace crosscode::macro_tool {
     /// \param macro_delimiter The delimiter of the macros.
     /// \param macro_param_separator The separator for a macro parameter.
     /// \return tokens is returned, its a vector containing the tokens of type token_type, which is a variant.
-    token_variant_vector macro_lexer(std::string_view text, char macro_delimiter, char macro_param_separator);
+    token_variant_vector macro_lexer(std::string_view text, char macro_delimiter='%', char macro_param_separator=':');
 
     /// \brief macro_render_engine renders macro tokens into a resulting text.
     /// \tparam Tmacro_handler is the type of the macro_handler.
