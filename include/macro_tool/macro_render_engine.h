@@ -7,6 +7,8 @@
 #include <numeric>
 #include <functional>
 #include <map>
+#include <string>
+#include <string_view>
 
 /// This crosscode::macro_tool namespace contains all code provided by this package.
 namespace crosscode::macro_tool {
