@@ -6,6 +6,9 @@
 //
 // We will show how to change macro delimiter % into $ and how to change the macro param separator : into |.
 struct echo {
+    static void begin_render(){};
+    static void done_render(){};
+
     static std::string handle(std::string_view macro, std::string_view param) {
         if (param.empty()) return std::string{macro};
         return std::string{macro} + "(" + std::string{param} + ")";

@@ -79,6 +79,7 @@ namespace crosscode::macro_tool {
         /// is made. The result of this call is a string which is then concatenated to the output string.
         /// \return The rendered text.
         std::string render(std::size_t reserve=0) {
+            macro_handler_.begin_render();
             std::string result;
             result.reserve(reserve);
             auto iterator = begin(tokens_);
@@ -100,7 +101,7 @@ namespace crosscode::macro_tool {
                     iterator++;
                 }
             }
-
+            macro_handler_.done_render();
             return result;
         }
     };

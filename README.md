@@ -26,7 +26,13 @@ replaces the macros.
 
 // You implement your macro handler.
 struct macro_handler {
-    std::chrono::system_clock::time_point time_point_ = std::chrono::system_clock::now();
+    std::chrono::system_clock::time_point time_point_;
+
+    void begin_render() {
+        time_point_ = std::chrono::system_clock::now();
+    }
+
+    static void done_render() {}
 
     static std::string handle_reverse(std::string_view param) {
         std::string result;

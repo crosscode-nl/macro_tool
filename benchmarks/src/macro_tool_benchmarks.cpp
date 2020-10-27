@@ -5,6 +5,9 @@
 using namespace crosscode::macro_tool;
 
 struct macro_handler {
+    static void begin_render(){};
+    static void done_render(){};
+
     static std::string handle(std::string_view,std::string_view) {
         return {};
     }

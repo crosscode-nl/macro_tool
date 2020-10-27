@@ -9,6 +9,9 @@ struct stateful_macro_handler {
 
     explicit stateful_macro_handler(int64_t counter) : counter_{counter} {}
 
+    static void begin_render(){};
+    static void done_render(){};
+
     std::string handle(std::string_view macro, std::string_view param) {
         if (macro=="COUNTER") {
             counter_++;
