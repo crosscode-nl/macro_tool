@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8.2)
-project(benchmarks)
+project(macro_tool_benchmarks)
 
 include(cmake/googlebenchmark.cmake)
 

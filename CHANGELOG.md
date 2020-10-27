@@ -1,6 +1,14 @@
 # Changelog
 
-## v1.1.0 - 2020-10-27 - Initial release
+## v1.2.0 - 2020-10-27 - Fixed project naming
+
+### Changed
+
+* Changed tests target to macro_tool_tests
+* Changed examples target to macro_tool_examples
+* Changed benchmarks target to macro_tool_benchmarks
+
+## v1.1.0 - 2020-10-27 - Added benchmarks
 
 ### Changed
 

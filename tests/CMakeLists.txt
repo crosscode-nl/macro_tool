@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.8.2)
 set(PARENT_PROJECT_NAME ${PROJECT_NAME})
-project(tests
+project(macro_tool_tests
         VERSION 0.1.0
         LANGUAGES C CXX
         )
