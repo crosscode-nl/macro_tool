@@ -14,8 +14,46 @@ macro_tool is a lean and simple C++17 library that helps parsing simple text mac
 
 Nested macros are not supported, and it also not meant as an advanced template engine.
 
+You can change the single character macro pair delimiter and single character macro parameter separator. 
+
 Using this library saves you writing code lexing/tokenizing this text, and you now only have write the code that 
 replaces the macros. 
+
+```cpp
+#include <iostream>
+#include <chrono>
+#include "macro_tool.h"
+
+// You implement your macro handler.
+struct macro_handler {
+    static std::string handle_date(std::string_view param) {
+        auto time_point = std::chrono::system_clock::now();
+        auto time = std::chrono::system_clock::to_time_t(time_point);
+        auto tm = std::localtime(&time);
+        if (param=="YEAR") return std::to_string(tm->tm_year+1900);
+        return asctime(tm);
+    }
+
+    static std::string handle(std::string_view macro, std::string_view param) {
+        if (macro=="AUTHOR") return "CrossCode";
+        if (macro=="DATE") return handle_date(param);
+        return std::string{};
+    }
+};
+
+// You use the render_macros with your handler. 
+int main() {
+    using namespace crosscode::macro_tool;
+    std::cout << render_macros<macro_handler>("(c)%DATE:YEAR% %AUTHOR%") << "\n";
+    std::cout << render_macros<macro_handler>("This macro was executed on: %DATE%") << "\n";
+    return 0;
+}
+// Possible output:
+// (c)2020 CrossCode
+// This macro was executed on: Tue Oct 27 15:16:06 2020
+```
+
+See the examples for a deeper explanation of the library. 
 
 ## Installation
 
