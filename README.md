@@ -121,7 +121,7 @@ include(FetchContent)
 FetchContent_Declare(
         macro_tool
         GIT_REPOSITORY https://github.com/crosscode-nl/macro_tool
-        GIT_TAG v1.3.0
+        GIT_TAG v1.3.1
 )
 FetchContent_MakeAvailable(macro_tool)
 target_link_libraries(${PROJECT_NAME} macro_tool)
@@ -140,7 +140,7 @@ include(FetchContent)
 FetchContent_Declare(
         macro_tool
         GIT_REPOSITORY https://github.com/crosscode-nl/macro_tool
-        GIT_TAG v1.3.0
+        GIT_TAG v1.3.1
 )
 FetchContent_MakeAvailable(macro_tool)
 target_link_libraries(${PROJECT_NAME} macro_tool)
@@ -205,7 +205,7 @@ target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
 To use an installed library you just have to add: 
 
 ```cmake
-find_package(MacroTool 1.3.0 REQUIRED)
+find_package(MacroTool 1.3.1 REQUIRED)
 target_link_libraries(${PROJECT_NAME} MacroTool::macro_tool)
 ```
 
@@ -218,7 +218,7 @@ project(example)
 add_executable(${PROJECT_NAME} main.cpp)
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
 
-find_package(MacroTool 1.3.0 REQUIRED)
+find_package(MacroTool 1.3.1 REQUIRED)
 target_link_libraries(${PROJECT_NAME} MacroTool::macro_tool)
 ```
 

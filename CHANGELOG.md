@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.3.1 - 2020-10-28 - Fixed documentation
+
+### Fixed
+
+* Fixed a small eye sore in the example in README.md.
+
 ## v1.3.0 - 2020-10-27 - Fixed project naming
 
 ### Added
